@@ -2,10 +2,6 @@
 
 **Shared state for humans and AI.** A Swift toolkit for building apps where humans and LLMs edit the same state, with validation and an audit trail.
 
-<p align="center">
-  <img src="demo.gif" alt="DuetChat Demo" width="300">
-</p>
-
 ## Overview
 
 DuetKit provides two libraries:
@@ -19,6 +15,10 @@ Open the source files in Xcode and check the `#Preview` at the bottom of each:
 
 - **`Sources/Duet/SchemaForm.swift`** — Auto-generated form from schema
 - **`Sources/DuetChat/DuetChat.swift`** — Chat UI that edits fields (try "Change name to Jane")
+
+<p align="center">
+  <img src="demo.gif" alt="DuetChat Demo" width="300">
+</p>
 
 ## Installation
 
