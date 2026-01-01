@@ -2,6 +2,10 @@
 
 **Shared state for humans and AI.** A Swift toolkit for building apps where humans and LLMs edit the same state, with validation and an audit trail.
 
+<p align="center">
+  <img src="demo.gif" alt="DuetChat Demo" width="300">
+</p>
+
 ## Overview
 
 DuetKit provides two libraries:
