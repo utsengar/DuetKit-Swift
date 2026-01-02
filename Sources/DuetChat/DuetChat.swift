@@ -27,6 +27,8 @@
 //  ```
 //
 
+#if os(iOS)
+
 import SwiftUI
 
 // MARK: - Chat State
@@ -299,3 +301,4 @@ private struct DemoContextProvider: DuetContextProvider {
 
 #endif
 
+#endif // os(iOS)

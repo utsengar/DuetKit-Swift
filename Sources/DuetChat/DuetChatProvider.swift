@@ -6,6 +6,8 @@
 //  Implement this to connect your own LLM or backend.
 //
 
+#if os(iOS)
+
 import Foundation
 
 // MARK: - Chat Provider Protocol
@@ -75,4 +77,6 @@ public struct EchoProvider: DuetChatProvider {
         return .success(message: "You said: \(message)")
     }
 }
+
+#endif // os(iOS)
 

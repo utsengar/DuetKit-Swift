@@ -6,6 +6,8 @@
 //  Slides up from the input bar.
 //
 
+#if os(iOS)
+
 import SwiftUI
 import Speech
 import AVFoundation
@@ -398,4 +400,6 @@ public struct MessageBubble: View {
         }
     }
 }
+
+#endif // os(iOS)
 

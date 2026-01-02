@@ -5,6 +5,10 @@
 //  Auto-generated SwiftUI form from a Schema.
 //  Provides standard input controls based on field types.
 //
+//  Note: This file is iOS-only due to iOS-specific UI components.
+//
+
+#if os(iOS)
 
 import SwiftUI
 
@@ -321,4 +325,6 @@ private let exampleSchema = Schema(
     }
 }
 
-#endif
+#endif // DEBUG
+
+#endif // os(iOS)

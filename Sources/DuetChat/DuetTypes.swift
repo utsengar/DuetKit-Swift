@@ -5,6 +5,8 @@
 //  Shared types for the DuetChat components.
 //
 
+#if os(iOS)
+
 import Foundation
 
 // MARK: - Chat Message
@@ -95,4 +97,6 @@ public struct DuetConfig {
         self.collapseOnScroll = collapseOnScroll
     }
 }
+
+#endif // os(iOS)
 

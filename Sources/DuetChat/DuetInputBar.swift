@@ -6,6 +6,8 @@
 //  Collapses to a grab bar, expands on interaction.
 //
 
+#if os(iOS)
+
 import SwiftUI
 import Speech
 import AVFoundation
@@ -269,4 +271,6 @@ public struct DuetInputBar: View {
         try? AVAudioSession.sharedInstance().setActive(false)
     }
 }
+
+#endif // os(iOS)
 

@@ -10,7 +10,9 @@
 //
 
 import Foundation
+#if canImport(SwiftUI)
 import SwiftUI
+#endif
 
 // MARK: - Storage Provider Protocol
 
@@ -437,6 +439,7 @@ public class Document {
     
     // MARK: - SwiftUI Bindings
     
+    #if canImport(SwiftUI)
     public func binding(for fieldId: String) -> Binding<String> {
         Binding(
             get: { self.getString(fieldId) },
@@ -471,6 +474,7 @@ public class Document {
             }
         )
     }
+    #endif
 }
 
 // MARK: - Document Errors
