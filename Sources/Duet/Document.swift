@@ -12,6 +12,7 @@
 //
 
 import Foundation
+import Observation
 
 // MARK: - Storage Provider Protocol
 
