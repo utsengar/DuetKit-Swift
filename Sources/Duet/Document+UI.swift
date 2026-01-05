@@ -6,6 +6,8 @@
 //  Separated from Document.swift to keep the core data model UI-agnostic.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 // MARK: - SwiftUI Bindings
@@ -51,4 +53,6 @@ public extension Document {
         )
     }
 }
+
+#endif
 

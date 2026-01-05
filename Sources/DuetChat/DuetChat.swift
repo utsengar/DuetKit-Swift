@@ -29,6 +29,7 @@
 
 #if os(iOS)
 
+import Observation
 import SwiftUI
 
 // MARK: - Chat State
