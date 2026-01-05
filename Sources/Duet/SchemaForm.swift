@@ -5,11 +5,52 @@
 //  Auto-generated SwiftUI form from a Schema.
 //  Provides standard input controls based on field types.
 //
+//  Note: UI components are iOS-only due to iOS-specific APIs.
+//  Uses @available to provide helpful compiler errors on unsupported platforms.
+//
+
+import Foundation
+
+// MARK: - In-Memory Storage (for previews and testing)
+
+public struct InMemoryStorage: StorageProvider {
+    public init() {}
+    
+    public func save(key: String, value: String) {}
+    public func load(key: String) -> String? { nil }
+    public func remove(key: String) {}
+}
+
+// MARK: - UserDefaults Storage (common implementation)
+
+public struct UserDefaultsStorage: StorageProvider {
+    public init() {}
+    
+    public func save(key: String, value: String) {
+        UserDefaults.standard.set(value, forKey: key)
+    }
+    
+    public func load(key: String) -> String? {
+        UserDefaults.standard.string(forKey: key)
+    }
+    
+    public func remove(key: String) {
+        UserDefaults.standard.removeObject(forKey: key)
+    }
+}
+
+// MARK: - SwiftUI Form Components (iOS only)
+
+#if os(iOS)
 
 import SwiftUI
 
 // MARK: - Auto-Generated Form
 
+@available(iOS 17.0, *)
+@available(macOS, unavailable, message: "SchemaForm is only available on iOS")
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 public struct SchemaForm: View {
     @Bindable var document: Document
     public var sections: [FormSection]? = nil
@@ -69,6 +110,10 @@ public struct SchemaForm: View {
 
 // MARK: - Form Section
 
+@available(iOS 17.0, *)
+@available(macOS, unavailable, message: "FormSection is only available on iOS")
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 public struct FormSection {
     public let title: String
     public let fieldIds: [String]
@@ -81,6 +126,10 @@ public struct FormSection {
 
 // MARK: - Individual Field Views
 
+@available(iOS 17.0, *)
+@available(macOS, unavailable, message: "TextFieldRow is only available on iOS")
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 public struct TextFieldRow: View {
     @Bindable var document: Document
     let field: Field
@@ -100,6 +149,10 @@ public struct TextFieldRow: View {
     }
 }
 
+@available(iOS 17.0, *)
+@available(macOS, unavailable, message: "NumberFieldRow is only available on iOS")
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 public struct NumberFieldRow: View {
     @Bindable var document: Document
     let field: Field
@@ -116,9 +169,7 @@ public struct NumberFieldRow: View {
             Text(field.label)
             Spacer()
             TextField("", text: $textValue)
-                #if os(iOS)
                 .keyboardType(.decimalPad)
-                #endif
                 .multilineTextAlignment(.trailing)
                 .frame(width: 100)
                 .onChange(of: textValue) { _, newValue in
@@ -143,6 +194,10 @@ public struct NumberFieldRow: View {
     }
 }
 
+@available(iOS 17.0, *)
+@available(macOS, unavailable, message: "ToggleRow is only available on iOS")
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 public struct ToggleRow: View {
     @Bindable var document: Document
     let field: Field
@@ -157,6 +212,10 @@ public struct ToggleRow: View {
     }
 }
 
+@available(iOS 17.0, *)
+@available(macOS, unavailable, message: "PickerRow is only available on iOS")
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 public struct PickerRow: View {
     @Bindable var document: Document
     let field: Field
@@ -177,6 +236,10 @@ public struct PickerRow: View {
     }
 }
 
+@available(iOS 17.0, *)
+@available(macOS, unavailable, message: "DateRow is only available on iOS")
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 public struct DateRow: View {
     @Bindable var document: Document
     let field: Field
@@ -203,6 +266,10 @@ public struct DateRow: View {
 
 // MARK: - Standalone Field Components (for custom layouts)
 
+@available(iOS 17.0, *)
+@available(macOS, unavailable, message: "DocumentTextField is only available on iOS")
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 public struct DocumentTextField: View {
     @Bindable var document: Document
     let fieldId: String
@@ -219,6 +286,10 @@ public struct DocumentTextField: View {
     }
 }
 
+@available(iOS 17.0, *)
+@available(macOS, unavailable, message: "DocumentNumberField is only available on iOS")
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 public struct DocumentNumberField: View {
     @Bindable var document: Document
     let fieldId: String
@@ -234,9 +305,7 @@ public struct DocumentNumberField: View {
     
     public var body: some View {
         TextField(placeholder, text: $textValue)
-            #if os(iOS)
             .keyboardType(.decimalPad)
-            #endif
             .onChange(of: textValue) { _, newValue in
                 if let num = Double(newValue) {
                     _ = document.tryEdit(fieldId, value: num)
@@ -249,6 +318,10 @@ public struct DocumentNumberField: View {
     }
 }
 
+@available(iOS 17.0, *)
+@available(macOS, unavailable, message: "DocumentToggle is only available on iOS")
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 public struct DocumentToggle: View {
     @Bindable var document: Document
     let fieldId: String
@@ -262,34 +335,6 @@ public struct DocumentToggle: View {
     
     public var body: some View {
         Toggle(label, isOn: document.boolBinding(for: fieldId))
-    }
-}
-
-// MARK: - In-Memory Storage (for previews and testing)
-
-public struct InMemoryStorage: StorageProvider {
-    public init() {}
-    
-    public func save(key: String, value: String) {}
-    public func load(key: String) -> String? { nil }
-    public func remove(key: String) {}
-}
-
-// MARK: - UserDefaults Storage (common implementation)
-
-public struct UserDefaultsStorage: StorageProvider {
-    public init() {}
-    
-    public func save(key: String, value: String) {
-        UserDefaults.standard.set(value, forKey: key)
-    }
-    
-    public func load(key: String) -> String? {
-        UserDefaults.standard.string(forKey: key)
-    }
-    
-    public func remove(key: String) {
-        UserDefaults.standard.removeObject(forKey: key)
     }
 }
 
@@ -308,6 +353,7 @@ private let exampleSchema = Schema(
     ]
 )
 
+@available(iOS 17.0, *)
 #Preview("SchemaForm Example") {
     @Previewable @State var doc = Document(
         schema: exampleSchema,
@@ -321,4 +367,6 @@ private let exampleSchema = Schema(
     }
 }
 
-#endif
+#endif // DEBUG
+
+#endif // os(iOS)

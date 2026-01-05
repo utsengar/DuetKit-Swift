@@ -8,9 +8,10 @@
 //
 //  Uses JSON Patch (RFC 6902) for LLM edits.
 //
+//  Note: SwiftUI bindings are in Document+UI.swift
+//
 
 import Foundation
-import SwiftUI
 
 // MARK: - Storage Provider Protocol
 
@@ -433,43 +434,6 @@ public class Document {
             return jsonString
         }
         return "{}"
-    }
-    
-    // MARK: - SwiftUI Bindings
-    
-    public func binding(for fieldId: String) -> Binding<String> {
-        Binding(
-            get: { self.getString(fieldId) },
-            set: { newValue in
-                // For text fields, just set directly
-                if self.schema.field(named: fieldId)?.type == .text {
-                    _ = self.tryEdit(fieldId, value: newValue)
-                } else if self.schema.field(named: fieldId)?.type == .number {
-                    // Try to convert to number
-                    if let num = Double(newValue) {
-                        _ = self.tryEdit(fieldId, value: num)
-                    }
-                }
-            }
-        )
-    }
-    
-    public func numberBinding(for fieldId: String) -> Binding<Double> {
-        Binding(
-            get: { self.getNumber(fieldId) },
-            set: { newValue in
-                _ = self.tryEdit(fieldId, value: newValue)
-            }
-        )
-    }
-    
-    public func boolBinding(for fieldId: String) -> Binding<Bool> {
-        Binding(
-            get: { self.getBool(fieldId) },
-            set: { newValue in
-                _ = self.tryEdit(fieldId, value: newValue)
-            }
-        )
     }
 }
 

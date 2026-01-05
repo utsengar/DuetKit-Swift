@@ -10,6 +10,7 @@ let package = Package(
     products: [
         .library(name: "Duet", targets: ["Duet"]),
         .library(name: "DuetChat", targets: ["DuetChat"]),
+        .executable(name: "DuetCLI", targets: ["DuetCLI"]),
     ],
     targets: [
         .target(
@@ -19,6 +20,10 @@ let package = Package(
         .target(
             name: "DuetChat",
             dependencies: []
+        ),
+        .executableTarget(
+            name: "DuetCLI",
+            dependencies: ["Duet"]
         ),
     ]
 )
